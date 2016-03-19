@@ -149,7 +149,8 @@
     <ClInclude Include="Label.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Label.cpp" />
+    <ClCompile Include="Lacel.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

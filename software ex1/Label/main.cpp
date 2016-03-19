@@ -29,7 +29,7 @@ int main() {
 	//DWORD wAttr2 = cbi.wAttributes | BACKGROUND_BLUE | BACKGROUND_GREEN;
 	//SetConsoleTextAttribute(h, wAttr2);
 	////////////////////////////////////////////////////////////////////////////
-
+	int x = 90;
 
 	printf("hello shenitzko and pasta ? \n\n\n\n\n\n");
 

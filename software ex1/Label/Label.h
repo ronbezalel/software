@@ -14,14 +14,19 @@ private:
 	HANDLE handle;
 	DWORD dw;
 	CONSOLE_CURSOR_INFO cci;
-
 	string labelText;
 
 
 public:
-	Label(short width, short highet, string text, CONSOLE_CURSOR_INFO _cci);
+	Label(short width, short hieght, string text, bool isVisible);
+	COORD GetCord();
+	string GetText();
+	DWORD GetColor();
 	void SetColor(DWORD color);
-	void Print();
+	void SetCursorEnable(bool enable);
+	void SwitchContent(string newText);
+	void Print() const;
+	void Hoover(bool isHover);
 	~Label();
 };
 

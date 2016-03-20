@@ -146,9 +146,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CheckBox.h" />
     <ClInclude Include="Label.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

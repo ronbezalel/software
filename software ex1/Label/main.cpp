@@ -1,10 +1,10 @@
-// testLable.cpp : Defines the entry point for the console application.
-//
 
 #include <Windows.h>
 #include <stdio.h>
 #include "Label.h"
-#include "CheckBox.h"
+#include "CheckList.h"
+#include "RadioList.h"
+#include "TextBox.h"
 
 HANDLE hStdin;
 DWORD fdwSaveOldMode;
@@ -28,7 +28,7 @@ int main() {
 	//l2.Print();
 	//l3.Print();
 	
-	
+	/*
 	//CheckBox Main
 	DWORD dw = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	string list[5] = {
@@ -38,9 +38,25 @@ int main() {
 		"yossi gay 4",
 		"yossi gay 5"
 	};
-	CheckBox box = CheckBox(list, 5, 10, 10, dw);
+	CheckList box = CheckList(list, 5, 10, 10, dw);
 	int x = 90;
 	box.Print();
+	*/
+	//radio list main
+	//DWORD dw = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+	//string list[5] = {
+	//	"yossi gay 1",
+	//	"yossi gay 2",
+	//	"yossi gay 3",
+	//	"yossi gay 4",
+	//	"yossi gay 5"
+	//};
+	//RadioList box = RadioList(list, 5, 10, 10, dw);
+	//int x = 90;
+	//box.Print();
+	TextBox t = TextBox(10,0,0);
+	t.Print();
+	cout << endl;
 
 
 	DWORD cNumRead, fdwMode, i;
@@ -74,9 +90,10 @@ int main() {
 		// Dispatch the events to the appropriate handler. 
 		for (i = 0; i < cNumRead; i++) {
 			//Send the input record to the textbox handler
-			box.HandleInput(irInBuf[i]);
+			t.HandleInput(irInBuf[i]);
 		}
 	}
+	
 
 	// Restore input mode on exit.
 	SetConsoleMode(hStdin, fdwSaveOldMode);

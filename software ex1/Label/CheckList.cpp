@@ -18,6 +18,7 @@ CheckList::CheckList(string* textList, int listSize, short width, short hieght, 
 		chosen[j] = false;
 	}
 }
+
 void CheckList::Print() {
 	for (std::vector<Label>::const_iterator i = list.begin(); i != list.end(); i++) {
 		i->Print();

@@ -33,6 +33,7 @@ public:
 	void MouseEventProc(MOUSE_EVENT_RECORD mer);
 	void HandleInput(INPUT_RECORD iRecord);
 	string GetText();
+	void SetText(string textToEnter);
 	~TextBox();
 };
 

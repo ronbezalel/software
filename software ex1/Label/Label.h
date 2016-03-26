@@ -27,6 +27,8 @@ public:
 	void SwitchContent(string newText);
 	void Print() const;
 	void Hoover(bool isHover);
+	int Length();
+	void CleanLabel();
 	~Label();
 };
 

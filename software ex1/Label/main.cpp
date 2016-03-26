@@ -5,6 +5,7 @@
 #include "CheckList.h"
 #include "RadioList.h"
 #include "TextBox.h"
+#include "ComboBox.h"
 
 HANDLE hStdin;
 DWORD fdwSaveOldMode;
@@ -43,22 +44,26 @@ int main() {
 	box.Print();
 	*/
 	//radio list main
-	//DWORD dw = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	//string list[5] = {
-	//	"yossi gay 1",
-	//	"yossi gay 2",
-	//	"yossi gay 3",
-	//	"yossi gay 4",
-	//	"yossi gay 5"
-	//};
-	//RadioList box = RadioList(list, 5, 10, 10, dw);
-	//int x = 90;
-	//box.Print();
-	TextBox t = TextBox(10,0,0);
-	t.Print();
-	cout << endl;
+	DWORD dw = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+	string list[5] = {
+		"yossi gay 1",
+		"yossi gay 2",
+		"yossi gay 3",
+		"yossi gay 4",
+		"yossi gay 5"
+	};
 
+	ComboBox box = ComboBox(list, 5, 5, 5, dw);
+	int x = 90;
+	box.PrintComboBox();
 
+	//textBox main
+	//TextBox t = TextBox(10,15,14);
+	//t.Print();
+	//cout << endl;
+	//t.SetText("eyal");
+
+	
 	DWORD cNumRead, fdwMode, i;
 	INPUT_RECORD irInBuf[128];
 
@@ -90,7 +95,7 @@ int main() {
 		// Dispatch the events to the appropriate handler. 
 		for (i = 0; i < cNumRead; i++) {
 			//Send the input record to the textbox handler
-			t.HandleInput(irInBuf[i]);
+			box.HandleInput(irInBuf[i]);
 		}
 	}
 	

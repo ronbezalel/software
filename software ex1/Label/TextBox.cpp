@@ -171,8 +171,6 @@ void TextBox::Delete() {
 		COORD reset = { curserPosition , startPoint.Y + 1 };
 		SetConsoleCursorPosition(handle, reset);
 	}
-	string tr33y = GetText();
-	int x = 90;
 }
 
 void TextBox::AddCharecter(char c) {
@@ -181,6 +179,17 @@ void TextBox::AddCharecter(char c) {
 			text[textIndex] = c;
 			cout << c;
 			MoveRight();
+		}
+	}
+}
+
+void TextBox::SetText(string textToEnter) {
+	if (textToEnter.size() < text.size()) {
+		COORD reset = { startPoint.X + 1 , startPoint.Y + 1 };
+		SetConsoleCursorPosition(handle, reset);
+		cout << textToEnter;
+		for (int i = 0; i < textToEnter.size(); i++) {
+			text[i] = textToEnter[i];
 		}
 	}
 }

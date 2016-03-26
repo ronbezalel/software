@@ -47,6 +47,26 @@ void Label::Print() const {
 	SetConsoleTextAttribute(handle, dw);
 	cout << labelText;
 }
+
+int Label::Length() {
+	int i = 0;
+	while (true) {
+		if (labelText[i] == '\0')break;
+		i++;
+	}
+	return i;
+}
+void Label::CleanLabel() {
+	int i = 0;
+	bool flage = true;
+	while (flage)
+	{
+		if (labelText[i] == '\0') break;
+		labelText[i] = ' ';
+		i++;
+	}
+	Print();
+}
 Label::~Label() {
 
 }

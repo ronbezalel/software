@@ -34,6 +34,7 @@ public:
 	void KeyEventProc(KEY_EVENT_RECORD ker);
 	void MouseEventProc(MOUSE_EVENT_RECORD mer);
 	void HandleInput(INPUT_RECORD iRecord);
+	string GetChosen();
 	~CheckList();
 };
 

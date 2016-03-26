@@ -48,6 +48,27 @@ void RadioList::Mark() {
 	return;
 }
 
+int RadioList::LongestOptios() {
+	int size = 0;
+	for (int i = 0; i < list.size(); i++) {
+		if (size <= list[i].Length()) size = list[i].Length();
+	}
+	return size;
+}
+
+string RadioList::GetChosen() {
+	int index = 0;
+	bool flage = false;
+	for (index; index < list.size(); index++) {
+		if (chosen[index]) {
+			flage = true;
+			break;
+		}
+	}
+	if (!flage) return "no choose";
+	return list[index].GetText();
+}
+
 RadioList::~RadioList(){
 
 }

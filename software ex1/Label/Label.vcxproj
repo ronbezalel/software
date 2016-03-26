@@ -147,12 +147,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CheckList.h" />
+    <ClInclude Include="ComboBox.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="RadioList.h" />
     <ClInclude Include="TextBox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckList.cpp" />
+    <ClCompile Include="ComboBox.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RadioList.cpp" />

@@ -13,25 +13,16 @@ DWORD fdwSaveOldMode;
 void ErrorExit(LPSTR lpszMessage);
 
 int main() {
-	//Label Main
-	
-	//Label l = Label(15, 0, "this is the label", true);
-	//Label l2 = Label(15,5, "b;lalalalala", true);
-	//Label l3 = Label(15,7, "b;lalalalala", true);
-	//DWORD dw = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	//DWORD dwcopy = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	//DWORD dw1 = (BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE) | dwcopy;
-	//DWORD dw2 = (~BACKGROUND_RED | ~BACKGROUND_GREEN | ~BACKGROUND_BLUE) & dw;
-	//l.SetColor(dw);
-	//l2.SetColor(dw1);
-	//l3.SetColor(dw2);
-	//l.Print();
-	//l2.Print();
-	//l3.Print();
-	
-	/*
-	//CheckBox Main
+
+	/* Label Main */
+	Label l = Label(15, 0, "yossi is mega gay, learn how to build fuckig automat!!", true);
 	DWORD dw = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+	l.SetColor(dw);
+	l.Print();
+	////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/* to test one of the controllers comment the "Label main" and un-commet the requested controller */
 	string list[5] = {
 		"yossi gay 1",
 		"yossi gay 2",
@@ -39,30 +30,14 @@ int main() {
 		"yossi gay 4",
 		"yossi gay 5"
 	};
-	CheckList box = CheckList(list, 5, 10, 10, dw);
-	int x = 90;
-	box.Print();
-	*/
-	//radio list main
-	DWORD dw = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	string list[5] = {
-		"yossi gay 1",
-		"yossi gay 2",
-		"yossi gay 3",
-		"yossi gay jfjskfjksfj 4",
-		"yossi gay 5"
-	};
-
-	ComboBox box = ComboBox(list, 5, 5, 5, dw);
-	int x = 90;
-	box.PrintComboBox();
-
-	//textBox main
-	//TextBox t = TextBox(10,15,14);
-	//t.Print();
-	//cout << endl;
-	//t.SetText("eyal");
-
+	///////////////////////////////////////////////////////////////////////////////////////
+	/*un-commet the requested controller*/
+	//CheckList controller = CheckList(list, 5, 10, 10, dw);
+	//RadioList controller = RadioList(list, 5, 10, 10, dw);
+	//TextBox controller = TextBox(10, 15, 14);
+	ComboBox controller = ComboBox(list, 5, 5, 5, dw);
+	controller.Print();
+	////////////////////////////////////////////////////////////////////////////////////
 	
 	DWORD cNumRead, fdwMode, i;
 	INPUT_RECORD irInBuf[128];
@@ -95,7 +70,7 @@ int main() {
 		// Dispatch the events to the appropriate handler. 
 		for (i = 0; i < cNumRead; i++) {
 			//Send the input record to the textbox handler
-			box.HandleInput(irInBuf[i]);
+			controller.HandleInput(irInBuf[i]);
 		}
 	}
 	

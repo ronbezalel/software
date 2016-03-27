@@ -12,32 +12,40 @@ ComboBox::ComboBox(string* textList, int size, short width, short hieght, DWORD 
 	EraseList();
 }
 
-void ComboBox::PrintComboBox() {
+void ComboBox::Print() {
 	chosenText->Print();
-	//optionsList->Print();
 }
 
 void ComboBox::KeyEventProc(KEY_EVENT_RECORD ker) {
-	optionsList->KeyEventProc(ker);
-	string chose = optionsList->GetChosen();
-	chosenText->SwitchContent(chose);
+	if (displayList) {
+		if (ker.wVirtualKeyCode == VK_ESCAPE) {
+			CloseList();
+			return;
+		}
+		optionsList->KeyEventProc(ker);
+		string chose = optionsList->GetChosen();
+		chosenText->CleanLabel();
+		if (chose != "no choose") {
+			chose[0] = '-';
+			chose[1] = ' ';
+			chose[2] = ' ';
+		}
+		else {
+			chose = "- chose 1 option:";
+		}
+		chosenText->SwitchContent(chose);
+	}
+	else {
+		if (ker.wVirtualKeyCode == VK_RETURN) {
+			OpenList();
+		}
+	}
+	
 }
 void ComboBox::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 	if (displayList) {
 		if (checkPosition(mer) && mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED) {
-			displayList = false;
-			EraseList();
-			string plus = optionsList->GetChosen();
-			if (plus != "no choose") {
-				plus[0] = '+';
-				plus[1] = ' ';
-				plus[2] = ' ';
-			}
-			else {
-				plus = "+ " + plus;
-			}
-			chosenText->CleanLabel();
-			chosenText->SwitchContent(plus);
+			CloseList();
 			return;
 		}
 		optionsList->MouseEventProc(mer);
@@ -55,8 +63,7 @@ void ComboBox::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 	}
 	else {
 		if (checkPosition(mer) && mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED) {
-			displayList = true;
-			optionsList->Print();
+			OpenList();
 		}
 	}
 }
@@ -103,6 +110,27 @@ bool ComboBox::checkPosition(MOUSE_EVENT_RECORD mer) {
 	return false;
 }
 
+void ComboBox::CloseList() {
+	displayList = false;
+	EraseList();
+	string plus = optionsList->GetChosen();
+	if (plus != "no choose") {
+		plus[0] = '+';
+		plus[1] = ' ';
+		plus[2] = ' ';
+	}
+	else {
+		plus = "+ " + plus;
+	}
+	chosenText->CleanLabel();
+	chosenText->SwitchContent(plus);
+	return;
+}
+
+void ComboBox::OpenList() {
+	displayList = true;
+	optionsList->Print();
+}
 
 ComboBox::~ComboBox() {
 	delete(chosenText);

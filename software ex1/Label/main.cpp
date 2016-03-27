@@ -15,7 +15,7 @@ void ErrorExit(LPSTR lpszMessage);
 int main() {
 
 	/* Label Main */
-	Label l = Label(15, 0, "yossi is mega gay, learn how to build fuckig automat!!", true);
+	Label l = Label(15, 0, "label for example", true);
 	DWORD dw = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	l.SetColor(dw);
 	l.Print();
@@ -24,11 +24,11 @@ int main() {
 
 	/* to test one of the controllers comment the "Label main" and un-commet the requested controller */
 	string list[5] = {
-		"yossi gay 1",
-		"yossi gay 2",
-		"yossi gay 3",
-		"yossi gay 4",
-		"yossi gay 5"
+		"line 1",
+		"line 2",
+		"line 3",
+		"line 4",
+		"line 5"
 	};
 	///////////////////////////////////////////////////////////////////////////////////////
 	/*un-commet the requested controller*/

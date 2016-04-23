@@ -2,25 +2,25 @@
 #define _LABEL_H_
 
 #include <Windows.h>
+#include "Controller.h"
 #include <stdio.h>
 #include <string>
 #include <iostream>
 
 using namespace std;
-class Label
-{
+class Label : Controller {
 private:
-	COORD cord = { 0,0 };
-	HANDLE handle;
+	//COORD cord = { 0,0 };
+	//HANDLE handle;
 	DWORD dw;
 	CONSOLE_CURSOR_INFO cci;
 	string labelText;
 
 
 public:
-	Label(short width, short hieght, string text, bool isVisible);
+	Label(short width, short height, string text, bool isVisible);
 	COORD GetCord();
-	string GetText();
+	string GetInput();
 	DWORD GetColor();
 	void SetColor(DWORD color);
 	void SetCursorEnable(bool enable);

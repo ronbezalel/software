@@ -2,22 +2,22 @@
 
 
 
-TextBox::TextBox(int boxLength, short width, short hieght) {
+TextBox::TextBox(int boxLength, short width, short height) :
+	InterActiveController(width, height), textIndex(0)
+{
 	boxSize = boxLength;
-	startPoint = { width , hieght };
-	handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	text = vector<char>(boxLength);
 	CONSOLE_CURSOR_INFO newCci = { 100, true };
 	SetConsoleCursorInfo(handle, &newCci);
 }
 
-void TextBox::Print() {
+void TextBox::Print(){
 	DWORD dw = FOREGROUND_BLUE | BACKGROUND_RED | FOREGROUND_INTENSITY;
-	for (short i = startPoint.X; i < startPoint.X + boxSize+2; i++) {
-		COORD tmpCoord = {i,startPoint.Y};
+	for (short i = coord.X; i < coord.X + boxSize+2; i++) {
+		COORD tmpCoord = {i,coord.Y};
 		SetConsoleCursorPosition(handle, tmpCoord);
 		SetConsoleTextAttribute(handle, dw);
-		if (i == startPoint.X) {
+		if (i == coord.X) {
 			tmpCoord.Y = tmpCoord.Y;
 			SetConsoleCursorPosition(handle, tmpCoord);
 			cout << '\xDA';
@@ -29,7 +29,7 @@ void TextBox::Print() {
 			cout << '\xC0';
 			continue;
 		}
-		if (i == startPoint.X + boxSize + 1) {
+		if (i == coord.X + boxSize + 1) {
 			tmpCoord.Y = tmpCoord.Y;
 			SetConsoleCursorPosition(handle, tmpCoord);
 			cout << '\xBF';
@@ -46,8 +46,8 @@ void TextBox::Print() {
 		SetConsoleCursorPosition(handle, tmpCoord);
 		cout << '\xC4';
 	}
-	curserPosition = startPoint.X;
-	COORD endPrint = { curserPosition, startPoint.Y};
+	curserPosition = coord.X;
+	COORD endPrint = { curserPosition, coord.Y};
 	SetConsoleCursorPosition(handle, endPrint);
 }
 
@@ -92,8 +92,8 @@ void TextBox::MousePressed(MOUSE_EVENT_RECORD mer) {
 	int res = CheckPosition(mer);
 	if (res != -1) {
 		curserPosition = res;
-		textIndex = res - startPoint.X-1;
-		COORD reset = { res , startPoint.Y + 1 };
+		textIndex = res - coord.X-1;
+		COORD reset = { res , coord.Y + 1 };
 		SetConsoleCursorPosition(handle, reset);
 		focus = true;
 	}
@@ -102,8 +102,8 @@ void TextBox::MousePressed(MOUSE_EVENT_RECORD mer) {
 int TextBox::CheckPosition(MOUSE_EVENT_RECORD mer) {
 	int YAxis = mer.dwMousePosition.Y;
 	int XAxis = mer.dwMousePosition.X;
-	if (XAxis <= startPoint.X + boxSize && XAxis >= startPoint.X + 1 &&
-		YAxis == startPoint.Y+1) {
+	if (XAxis <= coord.X + boxSize && XAxis >= coord.X + 1 &&
+		YAxis == coord.Y+1) {
 		return XAxis;
 	}
 	return -1;
@@ -131,9 +131,9 @@ void TextBox::KeyEventProc(KEY_EVENT_RECORD ker) {
 	}
 }
 void TextBox::MoveLeft() {
-	if (curserPosition > startPoint.X + 1) {
+	if (curserPosition > coord.X + 1) {
 		curserPosition--;
-		COORD left = { curserPosition , startPoint.Y + 1 };
+		COORD left = { curserPosition , coord.Y + 1 };
 		SetConsoleCursorPosition(handle, left);
 		if (focus) {
 			textIndex--;
@@ -143,9 +143,9 @@ void TextBox::MoveLeft() {
 }
 
 void TextBox::MoveRight() {
-	if (curserPosition < startPoint.X + boxSize + 1) {
+	if (curserPosition < coord.X + boxSize + 1) {
 		curserPosition++;
-		COORD right = { curserPosition , startPoint.Y + 1 };
+		COORD right = { curserPosition , coord.Y + 1 };
 		SetConsoleCursorPosition(handle, right);
 		if (focus) {
 			textIndex++;
@@ -165,10 +165,10 @@ void TextBox::Delete() {
 			}
 			text[i] = text[i + 1];
 			cout << text[i];
-			COORD moveRight = { curserPosition + offset++ , startPoint.Y + 1 };
+			COORD moveRight = { curserPosition + offset++ , coord.Y + 1 };
 			SetConsoleCursorPosition(handle, moveRight);
 		}
-		COORD reset = { curserPosition , startPoint.Y + 1 };
+		COORD reset = { curserPosition , coord.Y + 1 };
 		SetConsoleCursorPosition(handle, reset);
 	}
 }
@@ -185,7 +185,7 @@ void TextBox::AddCharecter(char c) {
 
 void TextBox::SetText(string textToEnter) {
 	if (textToEnter.size() < text.size()) {
-		COORD reset = { startPoint.X + 1 , startPoint.Y + 1 };
+		COORD reset = { coord.X + 1 , coord.Y + 1 };
 		SetConsoleCursorPosition(handle, reset);
 		cout << textToEnter;
 		for (int i = 0; i < textToEnter.size(); i++) {
@@ -194,7 +194,7 @@ void TextBox::SetText(string textToEnter) {
 	}
 }
 
-string TextBox::GetText() {
+string TextBox::GetInput() {
 	string str(text.begin(), text.end());
 	return str;
 }

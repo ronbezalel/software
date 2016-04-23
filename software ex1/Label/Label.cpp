@@ -1,9 +1,11 @@
 #include "Label.h";
 
-Label::Label(short width, short hieght, string text, bool isVisible) {
-	cord = { width, hieght };
+Label::Label(short width, short height, string text, bool isVisible):
+	Controller(width, height)
+{
+	//cord = { width, hieght };
 	labelText = text;
-	handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	//handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetCursorEnable(isVisible);
 }
 void Label::SetCursorEnable(bool enable) {
@@ -16,13 +18,13 @@ void Label::SetColor(DWORD color) {
 }
 void Label::SwitchContent(string newText) {
 	labelText = newText;
-	SetConsoleCursorPosition(handle, cord);
+	SetConsoleCursorPosition(handle, coord);
 	Print();
 }
 COORD Label::GetCord() {
-	return cord;
+	return coord;
 }
-string Label::GetText() {
+string Label::GetInput() {
 	return labelText;
 }
 DWORD Label::GetColor() {
@@ -43,7 +45,7 @@ void Label::Hoover(bool isHover) {
 	return;
 }
 void Label::Print() const {
-	SetConsoleCursorPosition(handle, cord);
+	SetConsoleCursorPosition(handle, coord);
 	SetConsoleTextAttribute(handle, dw);
 	cout << labelText;
 }

@@ -1,7 +1,8 @@
 #include "RadioList.h"
 #include "Label.h"
+#include "Controller.h"
 
-class ComboBox
+class ComboBox : public Controller
 {
 private:
 	Label* chosenText;
@@ -17,10 +18,11 @@ private:
 	void OpenList();
 
 public:
-	ComboBox(string* textList, int size, short width, short hieght, DWORD color);
+	ComboBox(string* textList, int size, short width, short height, DWORD color);
 	~ComboBox();
 	void Print();
 	void HandleInput(INPUT_RECORD iRecord);
+	string GetInput();
 
 };
 

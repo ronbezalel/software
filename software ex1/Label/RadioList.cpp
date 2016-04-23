@@ -9,7 +9,7 @@ RadioList::RadioList(string* textList, int listSize, short width, short hieght, 
 
 void RadioList::Mark() {
 	if (chosen[currentRow]) {
-		string newText = list[currentRow].GetText();
+		string newText = list[currentRow].GetInput();
 		newText[1] = ' ';
 		COORD newCoord = list[currentRow].GetCord();
 		DWORD color = list[currentRow].GetColor();
@@ -27,7 +27,7 @@ void RadioList::Mark() {
 			}
 		}
 		if (oldChoice != -1) {
-			string unmark = list[oldChoice].GetText();
+			string unmark = list[oldChoice].GetInput();
 			unmark[1] = ' ';
 			COORD unmarkCoord = list[oldChoice].GetCord();
 			DWORD unmarkcolor = list[oldChoice].GetColor();
@@ -36,7 +36,7 @@ void RadioList::Mark() {
 			list[oldChoice].Print();
 		}
 		//new chosen raw
-		string newText = list[currentRow].GetText();
+		string newText = list[currentRow].GetInput();
 		newText[1] = 'X';
 		COORD newCoord = list[currentRow].GetCord();
 		DWORD color = list[currentRow].GetColor();
@@ -56,7 +56,7 @@ int RadioList::LongestOptios() {
 	return size;
 }
 
-string RadioList::GetChosen() {
+string RadioList::GetInput() {
 	int index = 0;
 	bool flage = false;
 	for (index; index < list.size(); index++) {
@@ -66,7 +66,7 @@ string RadioList::GetChosen() {
 		}
 	}
 	if (!flage) return "no choose";
-	return list[index].GetText();
+	return list[index].GetInput();
 }
 
 RadioList::~RadioList(){

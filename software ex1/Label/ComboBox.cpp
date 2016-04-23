@@ -2,13 +2,14 @@
 
 
 
-ComboBox::ComboBox(string* textList, int size, short width, short hieght, DWORD color) 
+ComboBox::ComboBox(string* textList, int size, short width, short height, DWORD color) : 
+	Controller(width, height)
 {	
 	listSize = size;
-	chosenText = new Label(width, hieght, "+ chose 1 option:", false);
+	chosenText = new Label(width, height, "+ chose 1 option:", false);
 	DWORD dw = BACKGROUND_BLUE && color;
 	chosenText->SetColor(dw);
-	optionsList = new RadioList(textList, listSize, width, hieght+2, color);
+	optionsList = new RadioList(textList, listSize, width, height+2, color);
 	EraseList();
 }
 
@@ -23,7 +24,7 @@ void ComboBox::KeyEventProc(KEY_EVENT_RECORD ker) {
 			return;
 		}
 		optionsList->KeyEventProc(ker);
-		string chose = optionsList->GetChosen();
+		string chose = optionsList->GetInput();
 		chosenText->CleanLabel();
 		if (chose != "no choose") {
 			chose[0] = '-';
@@ -49,7 +50,7 @@ void ComboBox::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			return;
 		}
 		optionsList->MouseEventProc(mer);
-		string chose = optionsList->GetChosen();
+		string chose = optionsList->GetInput();
 		chosenText->CleanLabel();
 		if (chose != "no choose") {
 			chose[0] = '-';
@@ -113,7 +114,7 @@ bool ComboBox::checkPosition(MOUSE_EVENT_RECORD mer) {
 void ComboBox::CloseList() {
 	displayList = false;
 	EraseList();
-	string plus = optionsList->GetChosen();
+	string plus = optionsList->GetInput();
 	if (plus != "no choose") {
 		plus[0] = '+';
 		plus[1] = ' ';
@@ -130,6 +131,10 @@ void ComboBox::CloseList() {
 void ComboBox::OpenList() {
 	displayList = true;
 	optionsList->Print();
+}
+
+string ComboBox::GetInput() {
+	return optionsList->GetInput();
 }
 
 ComboBox::~ComboBox() {

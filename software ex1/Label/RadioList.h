@@ -7,7 +7,7 @@ public:
 	RadioList(string* textList, int listSize, short width, short hieght, DWORD color);
 	~RadioList();
 	void Mark();
-	string GetChosen();
+	string GetInput();
 	int LongestOptios();
 };
 

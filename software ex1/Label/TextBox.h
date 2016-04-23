@@ -16,7 +16,7 @@ private:
 	int boxSize;
 	int curserPosition;
 	int textIndex;
-	bool focus = false;
+	bool focus;
 
 	void MoveRight();
 	void MoveLeft();
